@@ -7,7 +7,7 @@ export function * idMaker () {
   while (true) yield id++
 }
 
-const getRandomNumber = (max, min = 0) => min + Math.floor(Math.random() * max)
+export const getRandomNumber = (max, min = 0) => min + Math.floor(Math.random() * max)
 
 export const getRandomHorseName = () => {
   return `${firstNames[getRandomNumber(firstNames.length)]} ${lastNames[getRandomNumber(lastNames.length)]}`

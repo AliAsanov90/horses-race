@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="resultsRounds.length"
+    v-if="roundsResults.length"
     class="results"
   >
     <div class="results__title">
@@ -9,7 +9,7 @@
 
     <div class="results__rounds">
       <div
-        v-for="round in resultsRounds"
+        v-for="round in roundsResults"
         :key="round.order"
         class="results__round"
       >
@@ -34,7 +34,7 @@
             <tbody>
               <tr
                 v-for="(horse, index) in round.horses"
-                :key="index"
+                :key="horse.id"
               >
                 <td>{{ index + 1 }}</td>
                 <td>{{ horse.name }}</td>
@@ -56,7 +56,7 @@ export default {
 
   computed: {
     ...mapState([
-      'resultsRounds'
+      'roundsResults'
     ])
   }
 }

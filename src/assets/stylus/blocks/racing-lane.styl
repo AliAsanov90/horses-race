@@ -1,0 +1,35 @@
+.racing-lane
+  display: flex
+  height: 65px
+  border-bottom: 1px dashed #000
+
+  &:first-of-type
+    border-top: 1px dashed #000
+
+  &__horse
+    position: relative
+    flex: 1
+    display: flex
+    align-items: center
+    height: 100%
+
+  &__horse img
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    width: 60px
+    height: 60px
+
+  &__number
+    display: inline-flex
+    justify-content: center
+    align-items: center
+    width: 40px
+    height: 100%
+    border: 2px solid #eeeeee
+    background-color: green
+
+  &__number span
+    font-weight: 700
+    color: #eeeeee
+    transform: rotate(-90deg)

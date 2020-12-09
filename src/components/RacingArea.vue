@@ -4,16 +4,12 @@
     class="racing-area"
   >
     <div class="racing-area__inner">
-      <div
+      <RacingLane
         v-for="(horse, index) in currentRound.horses"
-        :key="horse.name"
-        class="racing-area__lane"
-      >
-        <div class="racing-area__lane-number">
-          <span>{{ index + 1 }}</span>
-        </div>
-        <img src="images/horse.svg" width="60" height="60">
-      </div>
+        :key="horse.id"
+        :horse="horse"
+        :lane-number="index + 1"
+      />
     </div>
 
     <div class="racing-area__footer">
@@ -30,9 +26,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import RacingLane from './RacingLane.vue'
 
 export default {
   name: 'RacingArea',
+
+  components: {
+    RacingLane
+  },
 
   computed: {
     ...mapState([
