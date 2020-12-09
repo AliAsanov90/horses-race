@@ -5,7 +5,7 @@
     </div>
     <v-simple-table
       class="horse-list__table"
-      height="600px"
+      height="720px"
       fixed-header
       dense
     >

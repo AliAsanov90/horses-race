@@ -121,7 +121,25 @@ const state = {
       ],
       horsesNum: 10
     }
-  ]
+  ],
+
+  currentRound: {
+    order: 1,
+    distance: 1200,
+    horses: [
+      { name: 'a', color: 'red', condition: 48 },
+      { name: 'aa', color: 'red', condition: 48 },
+      { name: 'aaa', color: 'red', condition: 48 },
+      { name: 'aaaa', color: 'red', condition: 48 },
+      { name: 'aaaaa', color: 'red', condition: 48 },
+      { name: 'aaaaaa', color: 'red', condition: 48 },
+      { name: 'aaaaaaa', color: 'red', condition: 48 },
+      { name: 'aaaaaaaa', color: 'red', condition: 48 },
+      { name: 'aaaaaaaaa', color: 'red', condition: 48 },
+      { name: 'aaaaaaaaaa', color: 'red', condition: 48 }
+    ],
+    horsesNum: 10
+  }
 }
 
 export default state

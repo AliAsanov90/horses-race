@@ -1,2 +1,58 @@
 .racing-area
-  flex: 1 2 40%
+  flex: 1 1 50%
+  // padding: 20px
+  margin: 30px
+
+  &__inner
+    border-right: 5px solid red
+
+  &__lane
+    display: flex
+    height: 65px
+    border-bottom: 1px dashed #000
+
+    &:first-of-type
+      border-top: 1px dashed #000
+
+  &__lane-number
+    display: inline-flex
+    justify-content: center
+    align-items: center
+    width: 40px
+    height: 100%
+    border: 2px solid #eeeeee
+    background-color: green
+
+  &__lane-number span
+    font-weight: 700
+    color: #eeeeee
+    transform: rotate(-90deg)
+
+  &__footer
+    position: relative
+
+  &__round-info
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 80%
+    margin-top: 10px
+    padding: 5px
+    font-weight: 700
+    background-color: orange
+
+  &__round-order
+    margin-right: 10px
+
+  &__round-distance
+    margin-left: 10px
+
+  &__finish
+    position: absolute
+    top: 50%
+    right: -20px
+    transform: translateY(-50%)
+    font-size: 20px
+    font-weight: 700
+    text-transform: uppercase
+    color: red
