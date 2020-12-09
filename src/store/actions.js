@@ -59,20 +59,19 @@ const createRounds = (totalHorsesList, isResultsRounds = false) => {
 }
 
 const actions = {
-  init ({ commit }) {
-    const horsesList = createHorsesList()
-    commit('createHorsesList', horsesList)
-  },
-
   generate ({ commit, state }) {
+    const horses = createHorsesList()
+    commit('createHorsesList', horses)
+
     const { horsesList } = state
 
     const roundsProgram = createRounds(horsesList)
-    const roundsResults = createRounds(horsesList, true)
-    const currentRound = roundsProgram[0]
-
     commit('createRoundsProgram', roundsProgram)
+
+    const roundsResults = createRounds(horsesList, true)
     commit('createRoundsResults', roundsResults)
+
+    const currentRound = roundsProgram[0]
     commit('setCurrentRound', currentRound)
   }
 }

@@ -14,6 +14,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import { MAX_HORSE_CONDITION } from '@/constants/horses.js'
 
 export default {
   name: 'RacingLane',
@@ -38,11 +39,14 @@ export default {
 
   computed: {
     ...mapState([
+      'currentRound',
       'isRacePaused'
     ]),
 
     horseRunInterval () {
-      return 300
+      const speedCorrection = 10 // slow down horse with condition more than 90
+      const horseSpeedFactor = (MAX_HORSE_CONDITION - this.horse.condition + speedCorrection) / 100
+      return horseSpeedFactor * this.currentRound.distance
     }
   },
 
@@ -50,6 +54,7 @@ export default {
     isRacePaused (isPaused) {
       if (isPaused) {
         clearInterval(this.intervalId)
+        this.intervalId = null
       } else {
         this.animateHorse()
       }

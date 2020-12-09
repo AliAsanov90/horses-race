@@ -35,8 +35,13 @@
 
     &.generate
       background-color: green
+      &:disabled
+        cursor: not-allowed
+        opacity: 0.8
 
     &.start-pause
+      width: 100px
       background-color: blue
       &:disabled
         cursor: not-allowed
+        opacity: 0.8

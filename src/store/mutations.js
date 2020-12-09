@@ -22,7 +22,7 @@ const mutations = {
 
   moveHorse (state, horseId) {
     const horse = state.currentRound.horses.find(horse => horse.id === horseId)
-    horse.left += 1
+    horse.left += 3 // add 3px per interval
   }
 }
 

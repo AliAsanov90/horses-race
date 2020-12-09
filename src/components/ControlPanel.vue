@@ -5,6 +5,7 @@
       <button
         class="control-panel__button generate"
         type="button"
+        :disabled="!isRacePaused"
         @click="gen"
       >
         Generate program
@@ -15,7 +16,7 @@
         :disabled="!currentRound.horses"
         @click="toggle"
       >
-        Start / Pause
+        {{ isRacePaused ? 'Start' : 'Pause'}}
       </button>
     </div>
   </div>
@@ -29,7 +30,8 @@ export default {
 
   computed: {
     ...mapState([
-      'currentRound'
+      'currentRound',
+      'isRacePaused'
     ])
   },
 

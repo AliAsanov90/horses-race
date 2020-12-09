@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'HorsesList',
@@ -45,16 +45,6 @@ export default {
     ...mapState([
       'horsesList'
     ])
-  },
-
-  methods: {
-    ...mapActions([
-      'init'
-    ])
-  },
-
-  mounted () {
-    this.init()
   }
 }
 </script>
