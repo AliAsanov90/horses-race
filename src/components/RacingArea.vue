@@ -1,5 +1,5 @@
 <template>
-  <div>RacingArea</div>
+  <div class="racing-area">RacingArea</div>
 </template>
 
 <script>
