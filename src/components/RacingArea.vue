@@ -1,5 +1,8 @@
 <template>
-  <div class="racing-area">
+  <div
+    v-if="currentRound.horses"
+    class="racing-area"
+  >
     <div class="racing-area__inner">
       <div
         v-for="(horse, index) in currentRound.horses"

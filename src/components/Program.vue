@@ -1,5 +1,8 @@
 <template>
-  <div class="program">
+  <div
+    v-if="programRounds.length"
+    class="program"
+  >
     <div class="program__title">
       <h2>Program</h2>
     </div>

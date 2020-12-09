@@ -1,10 +1,13 @@
 <template>
-  <div class="horse-list">
-    <div class="horse-list__title">
-      <h2>Horse List (1-20)</h2>
+  <div
+    v-if="horsesList.length"
+    class="horses-list"
+  >
+    <div class="horses-list__title">
+      <h2>Horses List (1-20)</h2>
     </div>
     <v-simple-table
-      class="horse-list__table"
+      class="horses-list__table"
       height="720px"
       fixed-header
       dense
@@ -19,8 +22,8 @@
         </thead>
         <tbody>
           <tr
-            v-for="horse in horseList"
-            :key="horse.name"
+            v-for="horse in horsesList"
+            :key="horse.id"
           >
             <td>{{ horse.name }}</td>
             <td>{{ horse.color }}</td>
@@ -33,15 +36,25 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
-  name: 'HorseList',
+  name: 'HorsesList',
 
   computed: {
     ...mapState([
-      'horseList'
+      'horsesList'
     ])
+  },
+
+  methods: {
+    ...mapActions([
+      'init'
+    ])
+  },
+
+  mounted () {
+    this.init()
   }
 }
 </script>

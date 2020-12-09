@@ -3,7 +3,7 @@
     <ControlPanel />
 
     <div class="app__main">
-      <HorseList />
+      <HorsesList />
       <RacingArea />
       <Program />
       <Results />
@@ -13,7 +13,7 @@
 
 <script>
 import ControlPanel from '@/components/ControlPanel.vue'
-import HorseList from '@/components/HorseList.vue'
+import HorsesList from '@/components/HorsesList.vue'
 import RacingArea from '@/components/RacingArea.vue'
 import Program from '@/components/Program.vue'
 import Results from '@/components/Results.vue'
@@ -23,7 +23,7 @@ export default {
 
   components: {
     ControlPanel,
-    HorseList,
+    HorsesList,
     RacingArea,
     Program,
     Results
