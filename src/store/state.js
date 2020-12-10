@@ -9,7 +9,9 @@ const state = {
 
   currentRoundOrder: 1,
 
-  isRacePaused: true
+  isRacePaused: true,
+
+  programEnded: false
 }
 
 export default state

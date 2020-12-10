@@ -1,5 +1,5 @@
 import { HORSES_TOTAL_NUM } from '@/constants/horses.js'
-import { ROUNDS_TOTAL_NUM, RACE_DISTANCES_METERS, HORSES_PER_ROUND } from '@/constants/rounds.js'
+import { ROUNDS_TOTAL_NUM, RACE_DISTANCES_METERS, HORSES_PER_ROUND, INITIAL_ROUND } from '@/constants/rounds.js'
 import { idMaker, getRandomNumber, getRandomHorseName, getRandomHorseColor, getRandomHorseCondition } from '@/utils/helpers.js'
 
 const getRandomHorses = (horsesNum, totalHorsesList) => {
@@ -71,13 +71,36 @@ const actions = {
     const roundsResults = createRounds(horsesList, true)
     commit('createRoundsResults', roundsResults)
 
-    const currentRound = roundsProgram[0]
+    commit('setCurrentRoundOrder', {
+      maxRoundsNum: ROUNDS_TOTAL_NUM,
+      initialRound: INITIAL_ROUND
+    })
+
+    const currentRound = roundsProgram[state.currentRoundOrder - 1]
     commit('setCurrentRound', currentRound)
+
+    commit('setProgramEnded', false)
   },
 
   addHorseResult ({ commit, state }, horseId) {
-    const horseFinished = state.horsesList.find(horse => horse.id === horseId)
-    commit('addHorseResult', horseFinished)
+    const horseFinishedRound = state.horsesList.find(horse => horse.id === horseId)
+    commit('addHorseResult', horseFinishedRound)
+  },
+
+  goToNextRound ({ commit, state, dispatch }) {
+    commit('setCurrentRoundOrder', {
+      maxRoundsNum: ROUNDS_TOTAL_NUM,
+      initialRound: false
+    })
+
+    const currentRound = state.roundsProgram[state.currentRoundOrder - 1]
+    commit('setCurrentRound', currentRound)
+
+    dispatch('resetHorsesLeft')
+  },
+
+  resetHorsesLeft ({ commit }) {
+    commit('resetHorsesLeft')
   }
 }
 

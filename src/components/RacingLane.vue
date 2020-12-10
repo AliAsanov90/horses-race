@@ -3,6 +3,7 @@
     <div class="racing-lane__number">
       <span>{{ laneNumber }}</span>
     </div>
+
     <div
       class="racing-lane__lane"
       ref="racingLane"
@@ -18,7 +19,7 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
-import { MAX_HORSE_CONDITION, TOTAL_HORSE_STEPS } from '@/constants/horses.js'
+import { MAX_HORSE_CONDITION, TOTAL_HORSE_STEPS, HORSE_SPEED_FACTOR } from '@/constants/horses.js'
 
 export default {
   name: 'RacingLane',
@@ -38,7 +39,7 @@ export default {
   data () {
     return {
       intervalId: null,
-      horseFinished: false
+      horseFinishedRound: false
     }
   },
 
@@ -50,8 +51,8 @@ export default {
 
     horseRunInterval () {
       const speedCorrection = 10 // for slowing down the horse with condition more than 90
-      const horseSpeedFactor = (MAX_HORSE_CONDITION - this.horse.condition + speedCorrection) / 100
-      return horseSpeedFactor * this.currentRound.distance
+      const speedFactor = (MAX_HORSE_CONDITION - this.horse.condition + speedCorrection) / HORSE_SPEED_FACTOR
+      return Math.round(speedFactor * this.currentRound.distance)
     }
   },
 
@@ -62,6 +63,21 @@ export default {
       } else {
         this.animateHorse()
       }
+    },
+
+    'horse.left' (left) {
+      if (left === 0) {
+        this.horseFinishedRound = false
+      }
+    },
+
+    currentRound: {
+      handler (round) {
+        if (!this.isRacePaused && round.order > 1) {
+          this.animateHorse()
+        }
+      },
+      immediate: true
     }
   },
 
@@ -94,16 +110,16 @@ export default {
 
     animateHorse () {
       this.intervalId = setInterval(() => {
-        const horseStep = this.calculateHorseStepPx()
         const finishLeft = this.getFinishLeftPx()
 
         if (this.horse.left >= finishLeft) {
-          if (this.horseFinished) return
+          if (this.horseFinishedRound) return
 
-          this.horseFinished = true
+          this.horseFinishedRound = true
           this.removeInterval()
           this.addHorseResult(this.horse.id)
         } else {
+          const horseStep = this.calculateHorseStepPx()
           this.moveHorse({ horseId: this.horse.id, horseStep })
         }
       }, this.horseRunInterval)

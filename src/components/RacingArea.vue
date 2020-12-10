@@ -21,11 +21,19 @@
 
       <span class="racing-area__finish">Finish</span>
     </div>
+
+    <div
+      v-if="programFinished"
+      class="racing-area__end-message"
+    >
+      End of program!
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+import { ROUNDS_TOTAL_NUM } from '@/constants/rounds.js'
 import RacingLane from './RacingLane.vue'
 
 export default {
@@ -38,6 +46,48 @@ export default {
   computed: {
     ...mapState([
       'currentRound'
+    ]),
+
+    ...mapGetters([
+      'currentRoundResults'
+    ]),
+
+    isRoundFinished () {
+      return this.currentRoundResults.every(horse => horse.id)
+    },
+
+    notLastRoundFinished () {
+      return this.currentRound.order < ROUNDS_TOTAL_NUM && this.isRoundFinished
+    },
+
+    programFinished () {
+      return this.currentRound.order === ROUNDS_TOTAL_NUM && this.isRoundFinished
+    }
+  },
+
+  watch: {
+    isRoundFinished (isFinished) {
+      if (this.notLastRoundFinished) {
+        this.goToNextRound()
+      }
+    },
+
+    programFinished (isFinished) {
+      if (isFinished) {
+        this.toggleRace()
+        this.setProgramEnded()
+      }
+    }
+  },
+
+  methods: {
+    ...mapActions([
+      'goToNextRound'
+    ]),
+
+    ...mapMutations([
+      'toggleRace',
+      'setProgramEnded'
     ])
   }
 }

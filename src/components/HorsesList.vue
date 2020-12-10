@@ -6,6 +6,7 @@
     <div class="horses-list__title">
       <h2>Horses List (1-20)</h2>
     </div>
+
     <v-simple-table
       class="horses-list__table"
       height="720px"

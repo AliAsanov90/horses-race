@@ -20,6 +20,10 @@ const mutations = {
     state.isRacePaused = !state.isRacePaused
   },
 
+  setProgramEnded (state, ended = true) {
+    state.programEnded = ended
+  },
+
   moveHorse (state, { horseId, horseStep }) {
     const horse = state.currentRound.horses.find(horse => horse.id === horseId)
     horse.left += horseStep
@@ -30,6 +34,20 @@ const mutations = {
     const nextEmptyResultIndex = currentRoundResults.findIndex(result => !result.name)
 
     currentRoundResults.splice(nextEmptyResultIndex, 1, horse)
+  },
+
+  setCurrentRoundOrder (state, { maxRoundsNum, initialRound }) {
+    if (initialRound) {
+      state.currentRoundOrder = initialRound
+    } else if (state.currentRoundOrder < maxRoundsNum) {
+      state.currentRoundOrder++
+    }
+  },
+
+  resetHorsesLeft (state) {
+    state.currentRound.horses = state.currentRound.horses.map(horse => {
+      return { ...horse, left: 0 }
+    })
   }
 }
 
