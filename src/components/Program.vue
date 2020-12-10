@@ -29,7 +29,6 @@
                 <th>Position</th>
                 <th>Name</th>
                 <th>Color</th>
-                <th>Condition</th>
               </tr>
             </thead>
             <tbody>
@@ -40,7 +39,6 @@
                 <td>{{ index + 1 }}</td>
                 <td>{{ horse.name }}</td>
                 <td>{{ horse.color }}</td>
-                <td>{{ horse.condition }}</td>
               </tr>
             </tbody>
           </template>

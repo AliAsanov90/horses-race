@@ -45,7 +45,7 @@ const createRounds = (totalHorsesList, isResultsRounds = false) => {
     const roundOrder = getRoundOrder.next().value
     const roundDistance = RACE_DISTANCES_METERS[roundOrder - 1]
     const roundHorses = isResultsRounds
-      ? Array(HORSES_PER_ROUND).fill({ name: '', color: '', condition: null })
+      ? Array(HORSES_PER_ROUND).fill({ id: null, name: '', color: '', condition: null })
       : getRandomHorses(HORSES_PER_ROUND, totalHorsesList)
 
     const round = {
@@ -73,6 +73,11 @@ const actions = {
 
     const currentRound = roundsProgram[0]
     commit('setCurrentRound', currentRound)
+  },
+
+  addHorseResult ({ commit, state }, horseId) {
+    const horseFinished = state.horsesList.find(horse => horse.id === horseId)
+    commit('addHorseResult', horseFinished)
   }
 }
 

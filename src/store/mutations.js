@@ -20,9 +20,16 @@ const mutations = {
     state.isRacePaused = !state.isRacePaused
   },
 
-  moveHorse (state, horseId) {
+  moveHorse (state, { horseId, horseStep }) {
     const horse = state.currentRound.horses.find(horse => horse.id === horseId)
-    horse.left += 3 // add 3px per interval
+    horse.left += horseStep
+  },
+
+  addHorseResult (state, horse) {
+    const currentRoundResults = state.roundsResults[state.currentRoundOrder - 1].horses
+    const nextEmptyResultIndex = currentRoundResults.findIndex(result => !result.name)
+
+    currentRoundResults.splice(nextEmptyResultIndex, 1, horse)
   }
 }
 

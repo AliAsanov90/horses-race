@@ -7,6 +7,8 @@ const state = {
 
   currentRound: {},
 
+  currentRoundOrder: 1,
+
   isRacePaused: true
 }
 
